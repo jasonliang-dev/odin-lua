@@ -3,7 +3,11 @@ package luajit_luajit
 import "core:c"
 import lua ".."
 
-foreign import lua51 "../lua51.lib"
+when ODIN_OS == .Windows {
+	foreign import lua51 "../lua51.lib"
+} else when ODIN_OS == .Linux {
+	foreign import lua51 "../libluajit.a"
+}
 
 VERSION :: "LuaJIT 2.1.0-beta3"
 VERSION_NUM :: 20100

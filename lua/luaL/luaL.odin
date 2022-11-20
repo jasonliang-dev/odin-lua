@@ -5,7 +5,11 @@ import "core:c/libc"
 import "core:builtin"
 import lua ".."
 
-foreign import lua54 "../lua54.lib"
+when ODIN_OS == .Windows {
+	foreign import lua54 "../lua54.lib"
+} else when ODIN_OS == .Linux {
+	foreign import lua54 "../liblua54.a"
+}
 
 State :: lua.State
 
@@ -213,7 +217,8 @@ writestring :: #force_inline proc "c" (s: rawptr, l: uint) -> uint {
 }
 
 writeline :: #force_inline proc "c" () {
-	writestring(raw_data("\n"), 1)
+	str := "\n"
+	writestring(raw_data(str), 1)
 	libc.fflush(libc.stdout)
 }
 

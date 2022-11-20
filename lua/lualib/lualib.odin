@@ -3,7 +3,11 @@ package luajit_lualib
 import "core:c"
 import lua ".."
 
-foreign import lua54 "../lua54.lib"
+when ODIN_OS == .Windows {
+	foreign import lua54 "../lua54.lib"
+} else when ODIN_OS == .Linux {
+	foreign import lua54 "../liblua54.a"
+}
 
 VERSUFFIX :: "_" + lua.VERSION_MAJOR + "_" + lua.VERSION_MINOR
 

@@ -1,4 +1,4 @@
-# Odin + Lua + LuaJIT
+# odin-lua
 
 Lua 5.4.4 and LuaJIT bindings for the Odin programming language.
 
@@ -43,7 +43,7 @@ c.MessageBoxA(nil, "hello " .. name .. "!", "Message", 0)
 
 Copy the `lua` or `luajit` directory to a sutable location:
 
-```
+```sh
 git clone https://github.com/jasonliang-dev/odin-lua.git
 
 cp -R odin-lua/lua /path/to/Odin/shared
@@ -51,28 +51,42 @@ cp -R odin-lua/lua /path/to/Odin/shared
 cp -R odin-lua/lua /path/to/your/project
 ```
 
-If you're using LuaJIT, you'll need to copy `luajit/lua51.dll` and put it in
-the same location as your executable.
+If you're using LuaJIT on Windows, you'll need to copy `luajit/lua51.dll` and
+put it in the same location as your executable.
 
-This repo has prebuilt `.lib` files for Windows, but you may replace them with
-your own library files.
+## Building library files
 
-## Building library files for Lua
+This repo has prebuilt `.lib`, `.dll`, `.a`, and `.so` files for Windows and
+Linux. Follow the instructions below if you want to build these files on your
+own.
 
-Lua's GitHub mirror has a file `onelua.c` that makes it easy to create an
-executable and library file. Get the
-[latest release](https://github.com/lua/lua/releases), then run:
+### Lua
 
-```
+Lua's GitHub mirror has a file `onelua.c` which includes all other source
+files. Get the [latest release](https://github.com/lua/lua/releases), then:
+
+```sh
+# windows
 cl /DMAKE_LIB /c /O2 onelua.c
 lib onelua.obj /out:lua54.lib
+
+# linux
+clang -DMAKE_LIB -DLUA_USE_LINUX -c -O2 onelua.c
+ar rcs liblua54.a onelua.o
 ```
 
-## Building library files for LuaJIT
+### LuaJIT
 
-Get the source with `git clone https://luajit.org/git/luajit.git`, change
-to `luajit/src`, then run `msvcbuild.bat`. This produces `lua51.lib` and
-`lua51.dll`.
+Get the source with `git clone https://luajit.org/git/luajit.git`, then:
+
+```sh
+# windows
+cd src
+msvcbuild.bat # produces lua51.lib and lua51.dll
+
+# linux
+make # produces libluajit.a and libluajit.so
+```
 
 ## Differences from C
 

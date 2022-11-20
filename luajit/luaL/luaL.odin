@@ -6,7 +6,11 @@ import "core:c/libc"
 import "core:builtin"
 import lua ".."
 
-foreign import lua51 "../lua51.lib"
+when ODIN_OS == .Windows {
+	foreign import lua51 "../lua51.lib"
+} else when ODIN_OS == .Linux {
+	foreign import lua51 "../libluajit.a"
+}
 
 State :: lua.State
 

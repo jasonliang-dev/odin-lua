@@ -4,7 +4,11 @@ import "core:c"
 import "core:c/libc"
 import "core:mem"
 
-foreign import lua54 "lua54.lib"
+when ODIN_OS == .Windows {
+	foreign import lua54 "lua54.lib"
+} else when ODIN_OS == .Linux {
+	foreign import lua54 "liblua54.a"
+}
 
 VERSION_MAJOR :: "5"
 VERSION_MINOR :: "4"

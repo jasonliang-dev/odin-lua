@@ -3,7 +3,11 @@ package lua_lualib
 import "core:c"
 import lua ".."
 
-foreign import lua51 "../lua51.lib"
+when ODIN_OS == .Windows {
+	foreign import lua51 "../lua51.lib"
+} else when ODIN_OS == .Linux {
+	foreign import lua51 "../libluajit.a"
+}
 
 FILEHANDLE :: "FILE*"
 

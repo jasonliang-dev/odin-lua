@@ -4,7 +4,11 @@ import "core:c"
 import "core:c/libc"
 import "core:mem"
 
-foreign import lua51 "lua51.lib"
+when ODIN_OS == .Windows {
+	foreign import lua51 "lua51.lib"
+} else when ODIN_OS == .Linux {
+	foreign import lua51 "libluajit.a"
+}
 
 VERSION :: "Lua 5.1"
 RELEASE :: "Lua 5.1.4"
