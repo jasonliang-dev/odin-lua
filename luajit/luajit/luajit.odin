@@ -12,7 +12,7 @@ when ODIN_OS == .Windows {
 VERSION :: "LuaJIT 2.1.0-beta3"
 VERSION_NUM :: 20100
 VERSION_SYM :: version_2_1_0_beta3
-COPYRIGHT :: "Copyright (C) 2005-2017 Mike Pall"
+COPYRIGHT :: "Copyright (C) 2005-2022 Mike Pall"
 URL :: "http://luajit.org/"
 
 MODE_MASK :: 0x00ff
