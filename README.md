@@ -1,3 +1,5 @@
+⚠️ Odin now has Lua in the vendor library collection. https://github.com/odin-lang/Odin/tree/master/vendor/lua
+
 # odin-lua
 
 Lua 5.4.4 and LuaJIT bindings for the Odin programming language.
